@@ -31,7 +31,15 @@ func (check *BridgeFeeCheck) CheckFee(checks []*CheckFeeReq) ([]*CheckFeeRsp, er
 				rsps = append(rsps, newItem)
 				id2FeeRsp[fmt.Sprintf("%d%s", newItem.ChainId, newItem.Hash)] = newItem
 			} else {
-				if oldItem.PayState == STATE_NOTCHECK {
+				if oldItem.PayState == STATE_NOTCHECK && newItem.PayState == STATE_HASPAY {
+					oldItem.PayState = newItem.PayState
+					oldItem.MinProxyFee = newItem.MinProxyFee
+					oldItem.Amount = newItem.Amount
+				} else if oldItem.PayState == STATE_NOTPAY && newItem.PayState == STATE_NOTCHECK {
+					oldItem.PayState = newItem.PayState
+					oldItem.MinProxyFee = newItem.MinProxyFee
+					oldItem.Amount = newItem.Amount
+				} else if oldItem.PayState == STATE_NOTPAY && newItem.PayState == STATE_HASPAY {
 					oldItem.PayState = newItem.PayState
 					oldItem.MinProxyFee = newItem.MinProxyFee
 					oldItem.Amount = newItem.Amount
