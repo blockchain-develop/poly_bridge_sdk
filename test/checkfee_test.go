@@ -7,7 +7,7 @@ import (
 )
 
 func TestCheckFee(t *testing.T) {
-	sdk := poly_bridge_sdk.NewBridgeFeeCheck([][]string{[]string{"https://bridge.poly.network/testnet/v1/"},[]string{"http://40.115.136.96"}}, 5)
+	sdk := poly_bridge_sdk.NewBridgeFeeCheck([][]string{[]string{"https://bridge.poly.network/testnet/v1/"},[]string{"http://40.115.136.96:22000/v1/"}}, 5)
 	checks := make([]*poly_bridge_sdk.CheckFeeReq, 0)
 	checks = append(checks, &poly_bridge_sdk.CheckFeeReq {
 		ChainId: 2,
