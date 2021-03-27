@@ -1,4 +1,4 @@
-package bridgesdk
+package poly_bridge_sdk
 
 import (
 	"fmt"

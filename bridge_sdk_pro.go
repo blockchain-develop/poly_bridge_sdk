@@ -15,7 +15,7 @@
  * along with The poly network .  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package bridgesdk
+package poly_bridge_sdk
 
 import (
 	"fmt"
