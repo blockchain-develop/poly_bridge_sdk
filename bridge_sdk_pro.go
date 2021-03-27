@@ -63,10 +63,10 @@ func (pro *BridgeSdkPro) NodeSelection() {
 func (pro *BridgeSdkPro) nodeSelection() {
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Printf("node selection, recover info: %s", string(debug.Stack()))
+			fmt.Printf("node selection, recover info: %s\n", string(debug.Stack()))
 		}
 	}()
-	fmt.Printf("node selection of bridge sdk......")
+	fmt.Printf("node selection of bridge sdk......\n")
 	ticker := time.NewTicker(time.Second * time.Duration(pro.selectionSlot))
 	for {
 		select {
@@ -81,7 +81,7 @@ func (pro *BridgeSdkPro) selection() {
 	defer func() {
 		pro.mutex.Unlock()
 	}()
-	fmt.Printf("select node of bridge sdk......")
+	fmt.Printf("select node of bridge sdk......\n")
 	for url, info := range pro.infos {
 		if info == nil {
 			info = NewBridgeInfo(url)
@@ -92,7 +92,7 @@ func (pro *BridgeSdkPro) selection() {
 		}
 		online, err := info.sdk.Info()
 		if err != nil {
-			fmt.Printf("get server info err: %v, url: %s", err, url)
+			fmt.Printf("get server info err: %v, url: %s\n", err, url)
 		}
 		info.online = online
 	}
@@ -119,7 +119,7 @@ func (pro *BridgeSdkPro) CheckFee(checks []*CheckFeeReq) ([]*CheckFeeRsp, error)
 	for info != nil {
 		rsp, err := info.sdk.CheckFee(checks)
 		if err != nil {
-			fmt.Printf("check fee err: %v, url: %s", err, info.sdk.url)
+			fmt.Printf("check fee err: %v, url: %s\n", err, info.sdk.url)
 			info.online = false
 			info = pro.GetLatest()
 		} else {
